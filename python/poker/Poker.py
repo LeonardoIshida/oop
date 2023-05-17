@@ -29,23 +29,24 @@ class Carta:
             case 'espadas':
                 naipe = "\u2660"
 
+        valor = self.valor
         #verificando o tamanho do numero para nao quebrar formatacao das cartas
-        if self.valor == 10:
-            carta_valor = f'| {self.valor} {naipe}|\n'
+        if valor == 10:
+            carta_valor = f'| {valor} {naipe}|\n'
 
         #valores que nao quebram formatacao, mas tenho que alterar os valores das cartas
         else:
             match self.valor:
                 case 11:
-                    self.valor = 'J'
+                    valor = 'J'
                 case 12:
-                    self.valor = 'Q'
+                    valor = 'Q'
                 case 13:
-                    self.valor = 'K'
+                    valor = 'K'
                 case 14:
-                    self.valor = 'A'
+                    valor = 'A'
 
-            carta_valor = f'| {self.valor}  {naipe}|\n'
+            carta_valor = f'| {valor}  {naipe}|\n'
 
         #juntando todas as strings
         carta_completa = carta_top + carta_mid + carta_valor + carta_mid + carta_top
