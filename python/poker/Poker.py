@@ -64,10 +64,7 @@ class Poker:
         
     def isFlush(self, naipes):
         # verificando se tenho apenas um naipe
-        if len(set(naipes) == 1):
-            return True
-        else:
-            return False
+        return len(set(naipes)) == 1
         
     def isStraight(self, valores):
         #verificando se a carta na posicao i eh igual a proxima carta + 1
