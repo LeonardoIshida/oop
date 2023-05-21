@@ -1,18 +1,80 @@
 import random
+from Deck import Deck
+from Jogador import Jogador
 
 class Poker:
-    def contar_pontuacao(self, player):
+    def contar_pontuacao(self, player, valor_aposta):
         valores = []
         naipes = []
         qtd = [0 for _ in range(14)]
 
+        # criando listas para auxiliar na verificacao dos ganhos
         for carta in player.cartas:
-            valores.append(player.cartas.valor)
-            naipes.append(player.cartas.naipe)
-            qtd[player.cartas.valor-2] += 1
+            valores.append(carta.valor)
+            naipes.append(carta.naipe)
+            qtd[carta.valor-2] += 1
 
+        # ordenando os valores para ajudar na comparacao
         valores.sort()
         
+        if self.isRoyalStraightFlush(valores, naipes):
+            return valor_aposta * 200
+        
+        if self.isStraightFlush(valores, naipes):
+            return valor_aposta * 100
+        
+        if self.isQuadra(valores):
+            return valor_aposta * 50
+        
+        if self.isFullHand(valores):
+            return valor_aposta * 20
+        
+        if self.isFlush(naipes):
+            return valor_aposta * 10
+        
+        if self.isStraight(valores):
+            return valor_aposta * 5
+        
+        if self.isTrinca(qtd):
+            return valor_aposta * 2
+        
+        if self.isDupla(qtd):
+            return valor_aposta
+        
+        return 0
+    
+    def jogar(self, jogador, deck):
+        
+        while jogador.saldo > 0:
+            vlr_aposta = (int(input('Digite o valor que quer apostar: ')))
+            jogador.subtrai_saldo(vlr_aposta)
+            print(f'Saldo atual: {jogador.saldo}')
+            
+            # embaralhando a cada rodada
+            deck.embaralha_baralho()
+            
+            # pegando uma "mao" nova na rodada
+            jogador.criar_cartas(deck)
+            jogador.printa_cartas()
+            
+            #fazendo ate 3 trocas de cartas
+            for i in range(3):
+                resposta = input('Digite as cartas que quer trocar(digite enter para nao trocar): ')
+                if resposta == '':
+                    break
+
+                trocas = [int(x) for x in resposta.split()]
+                jogador.trocar_cartas(trocas, deck)
+                jogador.printa_cartas()
+                
+            
+            vlr_ganho = self.contar_pontuacao(jogador, vlr_aposta)
+            jogador.adiciona_saldo(vlr_ganho)
+            print(f'Parabens vc ganhou {vlr_ganho} !!!')
+            
+            # resetando as cartas do jogador
+            jogador.devolver_cartas(deck)
+            
     
     def isRoyalStraightFlush(self, valores, naipes):
         if self.isStraightFlush(valores, naipes) == False:
@@ -34,7 +96,7 @@ class Poker:
         
     def isQuadra(self, valores):
         # verificando se tenho apenas cartas com dois valores diferentes
-        if len(set(valores) != 2):
+        if len(set(valores)) != 2:
             return False
         
         # contando quantas vezes a carta do meio aparece, como esta ordenado, para ser uma quadra,
@@ -74,10 +136,11 @@ class Poker:
             
         return True
     
-    def isTrinca(self, valores):
-        # verificando se tenho apenas cartas com 2 valores diferentes
-        if len(set(valores)) > 3:
-            return False
+    def isTrinca(self, qtd):
+        return qtd.count(3) == 1
+    
+    def isDupla(self, qtd):
+        return qtd.count(2) == 2
         
 
 

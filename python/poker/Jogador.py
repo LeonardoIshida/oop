@@ -1,13 +1,18 @@
-import Carta, random
+import random
+from Deck import Deck
+from Carta import Carta
 
 class Jogador:
 
     def __init__(self):
-        self.saldo = 200
+        self.saldo = 200.0
         self.cartas = []
 
     def subtrai_saldo(self, dinheiro):
         self.saldo -= dinheiro
+        
+    def adiciona_saldo(self, dinheiro):
+        self.saldo += dinheiro
 
     def criar_cartas(self, baralho):
         #escolhendo aleatoriamente cinco cartas para iniciar a rodada
@@ -37,7 +42,30 @@ class Jogador:
 
         print(carta_to_print)
 
-    def trocar_cartas(self, lista_trocas):
+    def trocar_cartas(self, lista_trocas, deck):
         for pos in lista_trocas:
-            self.cartas[pos-1].sorteio_naipe()
-            self.cartas[pos-1].sorteio_valor()
+            # inserindo carta que vai ser trocada no baralho
+            deck.insere_carta_baralho(self.cartas[pos-1])
+            
+            # escolhendo uma carta aleatoria
+            indice_carta = random.randint(0, deck.len)
+            
+            # rettirando do baralho e inserindo na mao do jogador
+            self.cartas[pos-1] = deck.get_carta_baralho(indice_carta)
+            deck.retira_baralho(indice_carta)
+            
+    # funcao para devolver as cartas do jogador para o baralho
+    def devolver_cartas(self, deck):
+        for i in range(5):
+            deck.insere_carta_baralho(self.cartas[i])
+            
+        self.cartas = []
+        
+    # funcao para testar os casos de ganho
+    def manipular_cartas(self):
+        self.cartas[0] = Carta(1, 'paus')
+        self.cartas[1] = Carta(2, 'paus')
+        self.cartas[2] = Carta(4, 'paus')
+        self.cartas[3] = Carta(4, 'paus')
+        self.cartas[4] = Carta(2, 'ouros')
+        

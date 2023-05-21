@@ -6,15 +6,14 @@ class Carta:
         self.naipe = naipe
         self.valor = valor
         
-    
-    def sorteio_valor(self):
-        self.valor = random.randint(2, 14)
+    def sorteio_valor():
+        return random.randint(2, 14)
 
-    def sorteio_naipe(self):
+    def sorteio_naipe():
         naipes = ['ouros', 'copas', 'paus', 'espadas']
-        self.naipe = random.choice(naipes)
+        return random.choice(naipes)
 
-        
+    # funcao que converte a carta em uma string
     def to_string(self):
         carta_top = '+-----+\n'
         carta_mid = '|     |\n'
@@ -52,3 +51,4 @@ class Carta:
         carta_completa = carta_top + carta_mid + carta_valor + carta_mid + carta_top
 
         return carta_completa
+    
