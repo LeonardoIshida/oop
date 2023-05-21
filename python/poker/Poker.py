@@ -3,6 +3,7 @@ from Deck import Deck
 from Jogador import Jogador
 
 class Poker:
+    
     def contar_pontuacao(self, player, valor_aposta):
         valores = []
         naipes = []
