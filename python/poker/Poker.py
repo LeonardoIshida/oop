@@ -47,9 +47,25 @@ class Poker:
     def jogar(self, jogador, deck):
         
         while jogador.saldo > 0:
-            vlr_aposta = (int(input('Digite o valor que quer apostar: ')))
-            jogador.subtrai_saldo(vlr_aposta)
             print(f'Saldo atual: {jogador.saldo}')
+            
+            # laco para aceitar um valor valido do usuario ou F para sair
+            while True:
+                resposta = (input('Digite o valor que quer apostar ou para "F" sair: '))
+                if resposta == 'F':
+                    return
+                
+                # if caso a pessoa tenha apertado enter sem querer
+                if resposta == '':
+                    continue
+                
+                # verificando se o valor digitado eh valido
+                vlr_aposta = int(resposta)
+                if 0 < vlr_aposta <= jogador.saldo:
+                    jogador.subtrai_saldo(vlr_aposta)
+                    break
+                else:
+                    print('Valor invalido!')
             
             # embaralhando a cada rodada
             deck.embaralha_baralho()
@@ -59,7 +75,7 @@ class Poker:
             jogador.printa_cartas()
             
             #fazendo ate 3 trocas de cartas
-            for i in range(3):
+            for i in range(2):
                 resposta = input('Digite as cartas que quer trocar(digite enter para nao trocar): ')
                 if resposta == '':
                     break
@@ -143,7 +159,3 @@ class Poker:
     def isDupla(self, qtd):
         return qtd.count(2) == 2
         
-
-
-
-

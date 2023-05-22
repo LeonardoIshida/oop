@@ -19,8 +19,10 @@ class Jogador:
         for i in range(5):
             #esolhendo um indice aleatorio
             indice = random.randint(0, baralho.len - 1)
+            
             #inserindo a carta na "mao" do jogador
             self.cartas.append(baralho.get_carta_baralho(indice))
+            
             #removendo a carta do baralho
             baralho.retira_baralho(indice)
 
