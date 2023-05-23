@@ -46,15 +46,20 @@ class Jogador:
 
     def trocar_cartas(self, lista_trocas, deck):
         for pos in lista_trocas:
-            # inserindo carta que vai ser trocada no baralho
-            deck.insere_carta_baralho(self.cartas[pos-1])
-            
-            # escolhendo uma carta aleatoria
-            indice_carta = random.randint(0, deck.len)
-            
-            # rettirando do baralho e inserindo na mao do jogador
-            self.cartas[pos-1] = deck.get_carta_baralho(indice_carta)
-            deck.retira_baralho(indice_carta)
+            try:
+                # inserindo carta que vai ser trocada no baralho
+                deck.insere_carta_baralho(self.cartas[pos-1])
+                
+                # escolhendo uma carta aleatoria
+                indice_carta = random.randint(0, deck.len)
+                
+                # rettirando do baralho e inserindo na mao do jogador
+                self.cartas[pos-1] = deck.get_carta_baralho(indice_carta)
+                deck.retira_baralho(indice_carta)
+                
+            except:
+                print(f'{pos} nao eh uma posicao nao valida')
+                continue
             
     # funcao para devolver as cartas do jogador para o baralho
     def devolver_cartas(self, deck):

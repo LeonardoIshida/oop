@@ -55,17 +55,18 @@ class Poker:
                 if resposta == 'F':
                     return
                 
-                # if caso a pessoa tenha apertado enter sem querer
-                if resposta == '':
-                    continue
-                
                 # verificando se o valor digitado eh valido
-                vlr_aposta = int(resposta)
-                if 0 < vlr_aposta <= jogador.saldo:
-                    jogador.subtrai_saldo(vlr_aposta)
-                    break
-                else:
-                    print('Valor invalido!')
+                try:
+                    vlr_aposta = int(resposta)
+                    if 0 < vlr_aposta <= jogador.saldo:
+                        jogador.subtrai_saldo(vlr_aposta)
+                        break
+                    else:
+                        print('Valor invalido!')
+                        
+                # entrada nao eh o caracter F e nem numerico
+                except ValueError:
+                    print(f'Entrada nao valida!')
             
             # embaralhando a cada rodada
             deck.embaralha_baralho()
