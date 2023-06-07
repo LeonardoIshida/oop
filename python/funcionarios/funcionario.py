@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 class Funcionario:
-    salarioBase = -1
+    salarioBase = 5000.00
     
     def __init__(self, nome, CPF):
         self.nome = nome
@@ -39,11 +39,5 @@ class Funcionario:
             print('CPF invalido !!')
             return False
             
-            
-if __name__ == '__main__':
-    if Funcionario.verificaCPF('397797578-13'):
-        print('CPF valido yay')
-    else:
-        print('Aplicando golpes onlines kek')
-    
+
     
