@@ -29,9 +29,13 @@ class Funcionario:
             penultimo_dig = resto_dig // 10      
             
             soma_ult += (penultimo_dig * 2)
-            resto_ult = ((soma_ult * 10) % 11) % 10
+            resto_ult = ((soma_ult * 10) % 11)
+            if 10 <= resto_ult <= 11:
+                resto_ult = 0
             
-            resto_penult = ((soma_penult * 10) % 11) % 10
+            resto_penult = ((soma_penult * 10) % 11)
+            if 10 <= resto_penult <= 11:
+                resto_penult = 0
             
             return resto_penult == penultimo_dig and resto_ult == ultimo_dig
             
