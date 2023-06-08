@@ -63,8 +63,6 @@ public abstract class Funcionario {
                 return false;
 
              return true;
-            
-
         }
         catch (NumberFormatException e) {
             System.out.println("Formato de CPF invalido !!");

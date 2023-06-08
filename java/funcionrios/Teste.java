@@ -61,7 +61,6 @@ public class Teste {
 
                 else if (tipoFunc == 2)
                     arrayFunc[i] = new Vendedor(arrayNomes[i], arrayCPF[i], 1202.56);
-    
             }
         }
 

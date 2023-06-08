@@ -5,47 +5,57 @@ from assistente import Assistente
 
 def folhaSalarial(arrayFuncionarios):
     total = 0
-    for func in arrayFuncionarios:
-        func.calculaSalario()
-        print('-' * 25)
-        print(f'{func.nome} || {func.salario}')
-
-        total += func.salario
     print('-' * 25)
 
-    print(f'Salario total = {total}')
+    for func in arrayFuncionarios:
+        try:
+            salario_func =  func.calculaSalario()
+            total += salario_func
 
-def menu():
-    print('1) Criar gerente')
-    print('2) Criar assistente')
-    print('3) Criar vendedor')
-    print('4) Sair')
+            print(f'{func.nome} || {salario_func}')
+            print('-' * 25)
+        except:
+            continue
 
+    print(f'Folha salarial = {total}')
 
 if __name__ == '__main__':
+    n = 7
     lista_func = []
-    
-    while True:
-        
-        menu()
-        opt = int(input('Digite a opcao: '))
+    lista_cpf = []
+    lista_nomes = []
 
-        if opt == 4:
-            break
-        
-        novo_CPF = input('Digite o CPF: ')
-        if Funcionario.verificaCPF(novo_CPF) == False:
-            print('Nao foi possivel instanciar um novo Objeto')
-            continue
-        
-        nome = input('Digite o nome do funcionario: ')
-        match opt:
-            case 1:
-                lista_func.append(Gerente(nome, novo_CPF))
-            case 2:
-                lista_func.append(Assistente(nome, novo_CPF))
-            case 3:
-                comissao = float(input('Digite o valor da comissao: '))
-                lista_func.append(Vendedor(nome, novo_CPF, comissao))
-        
+    lista_cpf.append("59382082034")
+    lista_nomes.append("Lionel Messi")
+
+    lista_cpf.append("47910702086")
+    lista_nomes.append("Farid Tari")
+
+    lista_cpf.append("85841264060")
+    lista_nomes.append("Cristiano Ronaldo")
+
+    lista_cpf.append("32347464000")
+    lista_nomes.append("Lebron James")
+
+    lista_cpf.append("43355267090")
+    lista_nomes.append("Lewis Hamilon")
+
+    lista_cpf.append("21198182075")
+    lista_nomes.append("Tiger Woods")
+
+    lista_cpf.append("12345678901")
+    lista_nomes.append("Nikola Kovac")
+
+    for i in range(n):
+        tipo_func = i % 3
+
+        if Funcionario.verificaCPF(lista_cpf[i]):
+            match tipo_func:
+                case 0:
+                    lista_func.append(Gerente(lista_nomes[i], lista_cpf[i]))
+                case 1:
+                    lista_func.append(Assistente(lista_nomes[i], lista_cpf[i]))
+                case 2:
+                    lista_func.append(Vendedor(lista_nomes[i], lista_cpf[i], 125.64))
+    
     folhaSalarial(lista_func)

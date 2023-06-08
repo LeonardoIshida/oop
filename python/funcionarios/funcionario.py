@@ -12,21 +12,19 @@ class Funcionario:
         pass
         
     @staticmethod
-    def verificaCPF(numero: str):
+    def verificaCPF(CPF: str):
         try:
-            primeiros_dig, resto_dig_str = numero.split('-')
-            resto_dig = int(resto_dig_str)
-            
             soma_ult = 0
             soma_penult = 0
             mult_penult = [i for i in range(10, 1, -1)]
             mult_ult = [i for i in range(11, 2, -1)]
             for i in range(9):
-                soma_ult += (int(primeiros_dig[i]) * mult_ult[i])
-                soma_penult += (int(primeiros_dig[i]) * mult_penult[i])
+                soma_ult += (int(CPF[i]) * mult_ult[i])
+                soma_penult += (int(CPF[i]) * mult_penult[i])
                 
-            ultimo_dig = resto_dig % 10
-            penultimo_dig = resto_dig // 10      
+            digitos = int(CPF)
+            ultimo_dig = digitos % 10
+            penultimo_dig = (digitos // 10) % 10    
             
             soma_ult += (penultimo_dig * 2)
             resto_ult = ((soma_ult * 10) % 11)
