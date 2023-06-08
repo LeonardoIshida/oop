@@ -1,4 +1,5 @@
-public class Assistente extends Funcionario{
+public class Assistente extends Funcionario {
+    
     public Assistente(String nome, String CPF) {
         super(nome, CPF);
     }
