@@ -39,13 +39,13 @@
 
 
 <!-- ABOUT THE PROJECT -->
-# About The Project
+## About The Project
 
 Welcome to the OOP Projects Repository! This repository contains a collection of projects that demonstrate various concepts and implementations of Object-Oriented Programming. Each project showcases different aspects of OOP, including encapsulation, inheritance, polymorphism, and abstraction.
 
 
 
-## ⚙️ Built With
+### Built With
 
 [![My Skills](https://skillicons.dev/icons?i=java,python)](https://skillicons.dev)
 
